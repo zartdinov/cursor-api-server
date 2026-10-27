@@ -1,0 +1,16 @@
+.git
+.github
+node_modules
+dist
+coverage
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+sample-projects
+**/__tests__
+**/*.test.ts
+**/*.test.mjs
+**/*.test.js
+worker/test-helpers.ts

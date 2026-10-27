@@ -13,6 +13,17 @@ bun run server
 
 The server listens on `http://127.0.0.1:8787/v1` and starts the Cursor SDK bridge automatically. Get a Cursor user API key from the Cursor Dashboard under Integrations and use it as the Bearer token; do not commit it to source control.
 
+### Docker
+
+The image includes Bun and Node. Node runs the SDK bridge.
+
+```bash
+docker build -t api-for-cursor .
+docker run --rm -p 8787:8787 api-for-cursor
+```
+
+Inside the container the server listens on `0.0.0.0:8787`. Other settings are the same environment variables as a local run. The API key stays the request Bearer token and is not written into the image.
+
 > **Note:** the bridge runs as a Node subprocess (auto-detected, auto-restarted). The Cursor SDK speaks gRPC over `node:http2`, which Bun's http2 client cannot handle yet (`NGHTTP2_FRAME_SIZE_ERROR`), so Node is required alongside Bun. Override the binary with `CURSOR_SDK_BRIDGE_RUNTIME=/path/to/node`.
 
 ```bash
